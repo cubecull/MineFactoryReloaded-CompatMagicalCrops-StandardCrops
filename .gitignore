@@ -1,7 +1,6 @@
 .gradle/
 .settings/
 APIs/
-bin/
 eclipse/
 gradle/
 .classpath
