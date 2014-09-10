@@ -11,6 +11,7 @@ import net.minecraftforge.common.IPlantable;
 import powercrystals.minefactoryreloaded.MFRRegistry;
 import powercrystals.minefactoryreloaded.farmables.harvestables.HarvestableCropPlant;
 import powercrystals.minefactoryreloaded.farmables.plantables.PlantableCropPlant;
+import powercrystals.minefactoryreloaded.farmables.fertilizables.FertilizableCropPlant;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -29,7 +30,7 @@ public class MFRCompatMagicalCrops
 
 	public static final String _ID = "MineFactoryReloaded|CompatMagicalCrops|StandardCrops";
 	public static final String _NAME = "MineFactoryReloaded Compatability: MagicalCrops (Standard)";
-	public static final String _VERSION = "0.0.1";
+	public static final String _VERSION = "0.0.2";
 	public static final String _DEPENDENCIES = "after:PowerCrystalsCore;after:MineFactoryReloaded;after:magicalcrops";
 
 	public static final String[] foodCrops =
@@ -131,6 +132,15 @@ public class MFRCompatMagicalCrops
 			} catch (Exception exception)
 			{
 				_log.log(Level.SEVERE, "Tried to register Plantable Seed: Seeds" + cropName + " but failed.");
+				throw exception;
+			}
+			
+			try {
+				MFRRegistry.registerFertilizable(new FertilizableCropPlant(cropBlock.blockID, 7));
+				_log.log(Level.INFO, "Registered Fertilizable Crop: Crop" + cropName);
+			} catch (Exception exception)
+			{
+				_log.log(Level.SEVERE, "Tried to register Fertilizable Crop: Crop" + cropName + " but failed.");
 				throw exception;
 			}
 		}
